@@ -19,10 +19,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
 
-public class AddNote extends AppCompatActivity {
+public class AddList extends AppCompatActivity {
 
 	Toolbar toolbar;
-	EditText noteTitle, noteContents;
+	EditText listTitle, listContents;
 	Button submitButton;
 
 	String title;
@@ -34,19 +34,22 @@ public class AddNote extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d(TAG, "onCreate: " + "create");
 		super.onCreate(savedInstanceState);
 
 		//Set xml file and action bar
-		setContentView(R.layout.activity_add_note);
+		setContentView(R.layout.activity_add_list);
 		toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
+		Log.d(TAG, "onCreate: " + "ui applied");
 
-		noteTitle = findViewById(R.id.note_title);
-		noteContents = findViewById(R.id.note_contents);
+		listTitle = findViewById(R.id.list_title);
+		listContents = findViewById(R.id.list_contents);
 		NoteDatabase db = new NoteDatabase(this);
+		Log.d(TAG, "onCreate: " + "db created");
 
 
-		noteTitle.addTextChangedListener(new TextWatcher() {
+		listTitle.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -67,7 +70,7 @@ public class AddNote extends AppCompatActivity {
 			}
 		});
 
-		noteContents.addTextChangedListener(new TextWatcher() {
+		listContents.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -88,14 +91,14 @@ public class AddNote extends AppCompatActivity {
 			}
 		});
 
-		submitButton = findViewById(R.id.submit_button);
+		submitButton = findViewById(R.id.list_submit_button);
 
 		submitButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				//Save note
-				Note note = new Note(noteTitle.getText().toString(), noteContents.getText().toString(), todayDate, currentTime, "note");
-				db.addNote(note);
-				goToNotes();
+				Note list = new Note(listTitle.getText().toString(), listContents.getText().toString(), todayDate, currentTime, "list");
+				db.addNote(list);
+				goToLists();
 			}
 		});
 
@@ -112,8 +115,8 @@ public class AddNote extends AppCompatActivity {
 
 	}
 
-	private void goToNotes() {
-		Intent i = new Intent(this,NotesPage.class);
+	private void goToLists() {
+		Intent i = new Intent(this,ListsPage.class);
 		startActivity(i);
 	}
 

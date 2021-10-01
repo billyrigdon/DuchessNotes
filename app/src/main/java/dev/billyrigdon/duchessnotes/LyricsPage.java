@@ -18,43 +18,42 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class NotesPage extends AppCompatActivity {
+public class LyricsPage extends AppCompatActivity {
 
 	Toolbar toolbar;
 	RecyclerView recyclerView;
-	FloatingActionButton addNoteButton;
-	NotesAdapter adapter;
-	List<Note> notes;
+	FloatingActionButton addLyricButton;
+	LyricsAdapter adapter;
+	List<Note> lyrics;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_notes_page);
+		setContentView(R.layout.activity_lyrics_page);
 
 		//Configure toolbar
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		//Create new database object and pull notes from database
+		//Create new database object and pull lyrics from database
 		NoteDatabase db = new NoteDatabase(this);
-		notes = db.getNotes("note");
-		//Log.d(TAG, "onCreate: " + notes.get(0).getID());
 
+		lyrics = db.getNotes("lyric");
 
 		//Grab recycler view and set the layout Manager
-		recyclerView = findViewById(R.id.list_of_notes);
+		recyclerView = findViewById(R.id.list_of_lyrics);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 		//Create new adapter and set recycler view to use adapter
-		adapter = new NotesAdapter(this,notes);
+		adapter = new LyricsAdapter(this,lyrics);
 		recyclerView.setAdapter(adapter);
 
-		//Listener for the add notes button
-		addNoteButton = (FloatingActionButton) findViewById(R.id.add_note_button);
-		addNoteButton.setOnClickListener(new View.OnClickListener() {
+		//Listener for the add lyrics button
+		addLyricButton = (FloatingActionButton) findViewById(R.id.add_lyric_button);
+		addLyricButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Intent addNoteIntent = new Intent(v.getContext(), AddNote.class);
-				startActivity(addNoteIntent);
+				Intent addLyricIntent = new Intent(v.getContext(), AddLyric.class);
+				startActivity(addLyricIntent);
 			}
 		});
 	}

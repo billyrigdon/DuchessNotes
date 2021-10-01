@@ -19,10 +19,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
 
-public class AddNote extends AppCompatActivity {
+public class AddLyric extends AppCompatActivity {
 
 	Toolbar toolbar;
-	EditText noteTitle, noteContents;
+	EditText lyricTitle, lyricContents;
 	Button submitButton;
 
 	String title;
@@ -37,16 +37,16 @@ public class AddNote extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 
 		//Set xml file and action bar
-		setContentView(R.layout.activity_add_note);
+		setContentView(R.layout.activity_add_lyric);
 		toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		noteTitle = findViewById(R.id.note_title);
-		noteContents = findViewById(R.id.note_contents);
+		lyricTitle = findViewById(R.id.lyric_title);
+		lyricContents = findViewById(R.id.lyric_contents);
 		NoteDatabase db = new NoteDatabase(this);
 
 
-		noteTitle.addTextChangedListener(new TextWatcher() {
+		lyricTitle.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -67,7 +67,7 @@ public class AddNote extends AppCompatActivity {
 			}
 		});
 
-		noteContents.addTextChangedListener(new TextWatcher() {
+		lyricContents.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -88,14 +88,14 @@ public class AddNote extends AppCompatActivity {
 			}
 		});
 
-		submitButton = findViewById(R.id.submit_button);
+		submitButton = findViewById(R.id.lyric_submit_button);
 
 		submitButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				//Save note
-				Note note = new Note(noteTitle.getText().toString(), noteContents.getText().toString(), todayDate, currentTime, "note");
-				db.addNote(note);
-				goToNotes();
+				Note lyric = new Note(lyricTitle.getText().toString(), lyricContents.getText().toString(), todayDate, currentTime, "lyric");
+				db.addNote(lyric);
+				goToLyrics();
 			}
 		});
 
@@ -112,8 +112,8 @@ public class AddNote extends AppCompatActivity {
 
 	}
 
-	private void goToNotes() {
-		Intent i = new Intent(this,NotesPage.class);
+	private void goToLyrics() {
+		Intent i = new Intent(this,LyricsPage.class);
 		startActivity(i);
 	}
 

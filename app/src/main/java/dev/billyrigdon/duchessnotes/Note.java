@@ -6,22 +6,25 @@ public class Note {
 	private String contents;
 	private String date;
 	private String time;
+	private String category;
 
 	Note(){}
 
-	Note(String title, String contents, String date, String time){
+	Note(String title, String contents, String date, String time, String category){
 		this.title = title;
 		this.contents = contents;
 		this.date = date;
 		this.time = time;
+		this.category = category;
 	}
 
-	Note(long ID, String title, String contents, String date, String time ) {
+	Note(long ID, String title, String contents, String date, String time, String category ) {
 		this.ID = ID;
 		this.title = title;
 		this.contents = contents;
 		this.date = date;
 		this.time = time;
+		this.category = category;
 	}
 
 	public long getID() {
@@ -63,4 +66,8 @@ public class Note {
 	public void setTime(String time) {
 		this.time = time;
 	}
+
+	public String getCategory() {return category;}
+
+	public void setCategory(String category) {this.category = category;}
 }

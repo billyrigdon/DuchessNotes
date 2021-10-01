@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNote">
+    android:background="@color/white"
+    tools:context=".LyricsPage">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -24,50 +25,26 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <EditText
-        android:id="@+id/note_title"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_of_lyrics"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="#00FFFFFF"
-        android:ems="10"
-        android:hint="Note Title"
-        android:inputType="textPersonName"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
-    <EditText
-        android:id="@+id/note_contents"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_lyric_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@null"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Note Contents"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/note_title" />
-
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/primary"
-        android:text="Add Note"
+        android:backgroundTint="@color/teal_700"
+        android:clickable="true"
+        android:contentDescription="Add Lyric"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:srcCompat="@drawable/ic_baseline_note_add_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

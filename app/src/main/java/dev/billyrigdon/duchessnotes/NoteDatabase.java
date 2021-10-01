@@ -24,6 +24,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
 	private static final String KEY_CONTENT = "contents";
 	private static final String KEY_DATE = "date";
 	private static final String KEY_TIME = "time";
+	private static final String KEY_CATEGORY = "category";
 
 	NoteDatabase(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,7 +34,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-		String query = "CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, contents TEXT, date TEXT, time TEXT) ";
+		String query = "CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, contents TEXT, date TEXT, time TEXT, category TEXT) ";
 
 		sqLiteDatabase.execSQL(query);
 
@@ -59,6 +60,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
 		contentValues.put(KEY_CONTENT, note.getContents());
 		contentValues.put(KEY_DATE, note.getDate());
 		contentValues.put(KEY_TIME, note.getTime());
+		contentValues.put(KEY_CATEGORY, note.getCategory());
 
 		long ID = db.insert(DATABASE_TABLE, null, contentValues);
 
@@ -68,7 +70,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
 	public Note getNote(long id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
-		Cursor returnedNote = db.query(DATABASE_TABLE, new String[]{KEY_ID, KEY_TITLE, KEY_CONTENT, KEY_DATE, KEY_TIME}, KEY_ID + "=?",
+		Cursor returnedNote = db.query(DATABASE_TABLE, new String[]{KEY_ID, KEY_TITLE, KEY_CONTENT, KEY_DATE, KEY_TIME, KEY_CATEGORY}, KEY_ID + "=?",
 				new String[]{String.valueOf(id)}, null, null, null);
 
 		if (returnedNote != null) {
@@ -76,17 +78,18 @@ public class NoteDatabase extends SQLiteOpenHelper {
 		}
 
 		return new Note(returnedNote.getLong(0), returnedNote.getString(1), returnedNote.getString(2),
-				returnedNote.getString(3), returnedNote.getString(4));
+				returnedNote.getString(3), returnedNote.getString(4), returnedNote.getString(5));
 
 	}
-	public List<Note> getNotes() {
+
+	public List<Note> getNotes(String noteCategory) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		List<Note> allNotes = new ArrayList<>();
 
-		String query = "SELECT * FROM " + DATABASE_TABLE;
-		Cursor returnedNote = db.rawQuery(query,null);
+		String query = "SELECT * FROM " + DATABASE_TABLE + " WHERE category = '" + noteCategory + "'" ;
+		Cursor returnedNote = db.rawQuery(query, null);
 		if (returnedNote.moveToFirst()) {
-			do{
+			do {
 
 				Note note = new Note();
 				note.setID(returnedNote.getLong(0));
@@ -101,5 +104,24 @@ public class NoteDatabase extends SQLiteOpenHelper {
 		}
 
 		return allNotes;
+	}
+
+	public void deleteNote(long id) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete("notes", KEY_ID + "=?", new String[]{String.valueOf(id)});
+		db.close();
+	}
+
+	public int editNote(Note note) {
+
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(KEY_TITLE, note.getTitle());
+		contentValues.put(KEY_CONTENT, note.getContents());
+		contentValues.put(KEY_DATE, note.getDate());
+		contentValues.put(KEY_TIME, note.getTime());
+
+		return db.update(DATABASE_TABLE,contentValues,KEY_ID + "=?", new String[] {String.valueOf(note.getID())});
 	}
 }

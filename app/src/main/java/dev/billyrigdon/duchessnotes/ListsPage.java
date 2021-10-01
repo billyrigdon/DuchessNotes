@@ -18,43 +18,42 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class NotesPage extends AppCompatActivity {
+public class ListsPage extends AppCompatActivity {
 
 	Toolbar toolbar;
 	RecyclerView recyclerView;
-	FloatingActionButton addNoteButton;
-	NotesAdapter adapter;
-	List<Note> notes;
+	FloatingActionButton addListButton;
+	ListsAdapter adapter;
+	List<Note> lists;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_notes_page);
+		setContentView(R.layout.activity_lists_page);
 
 		//Configure toolbar
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		//Create new database object and pull notes from database
+		//Create new database object and pull lyrics from database
 		NoteDatabase db = new NoteDatabase(this);
-		notes = db.getNotes("note");
-		//Log.d(TAG, "onCreate: " + notes.get(0).getID());
 
+		lists = db.getNotes("list");
 
 		//Grab recycler view and set the layout Manager
-		recyclerView = findViewById(R.id.list_of_notes);
+		recyclerView = findViewById(R.id.list_of_lists);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 		//Create new adapter and set recycler view to use adapter
-		adapter = new NotesAdapter(this,notes);
+		adapter = new ListsAdapter(this,lists);
 		recyclerView.setAdapter(adapter);
 
-		//Listener for the add notes button
-		addNoteButton = (FloatingActionButton) findViewById(R.id.add_note_button);
-		addNoteButton.setOnClickListener(new View.OnClickListener() {
+		//Listener for the add lyrics button
+		addListButton = (FloatingActionButton) findViewById(R.id.add_list_button);
+		addListButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Intent addNoteIntent = new Intent(v.getContext(), AddNote.class);
-				startActivity(addNoteIntent);
+				Intent addListIntent = new Intent(v.getContext(), AddList.class);
+				startActivity(addListIntent);
 			}
 		});
 	}

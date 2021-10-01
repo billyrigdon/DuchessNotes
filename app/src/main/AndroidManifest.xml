@@ -11,6 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DuchessNotes.NoActionBar">
         <activity
+            android:name=".ListsPage"
+            android:exported="true" />
+        <activity
+            android:name=".AddList"
+            android:exported="true" />
+        <activity
+            android:name=".LyricsPage"
+            android:exported="true" />
+        <activity
+            android:name=".AddLyric"
+            android:exported="true" />
+        <activity
             android:name=".OpenNote"
             android:exported="true" />
         <activity

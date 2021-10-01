@@ -36,6 +36,23 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 
+		listsCard = (CardView) findViewById(R.id.lists_card);
+		listsCard.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent listIntent = new Intent(v.getContext(), ListsPage.class );
+				startActivity(listIntent);
+			}
+		});
+
+		lyricsCard = (CardView) findViewById(R.id.lyrics_card);
+		lyricsCard.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent lyricIntent = new Intent(view.getContext(),LyricsPage.class);
+				startActivity(lyricIntent);
+			}
+		});
+
 
 
 	}

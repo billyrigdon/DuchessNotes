@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".AddNote">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -19,21 +20,26 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="#444444"
             app:popupTheme="@style/Theme.DuchessNotes.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <EditText
         android:id="@+id/open_note_title"
-        android:layout_width="0dp"
+        style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@null"
         android:ems="10"
         android:hint="Note Title"
         android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
@@ -51,6 +57,7 @@
         android:gravity="start|top"
         android:hint="Note Contents"
         android:inputType="textMultiLine"
+        android:singleLine="true"
         app:layout_constraintBottom_toTopOf="@+id/open_note_save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,9 +70,23 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Button"
+        android:backgroundTint="@color/primary"
+        android:text="Save"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/open_note_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="76dp"
+        android:clickable="true"
+        app:backgroundTint="#DB6E6E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
